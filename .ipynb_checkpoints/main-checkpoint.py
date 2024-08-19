@@ -111,7 +111,7 @@ def run_single_model(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', type=str, default='yelp', help='The datasets is ml-1m')
+    parser.add_argument('--dataset', type=str, default='ml-1m', help='The datasets is ml-1m')
     parser.add_argument('--config', type=str, default='', help='External config file name.')
     parser.add_argument('--model', type=str, default='NCL', help='model name.')
     parser.add_argument('--svd', type=bool, default=False, help='Singular value decomposition (SVD).') 
