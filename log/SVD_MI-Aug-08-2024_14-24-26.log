@@ -1,0 +1,593 @@
+Thu 08 Aug 2024 14:24:26 INFO  
+General Hyper Parameters:
+gpu_id = 6
+use_gpu = True
+seed = 2020
+state = INFO
+reproducibility = True
+data_path = dataset/ml-1m
+show_progress = True
+save_dataset = False
+save_dataloaders = False
+benchmark_filename = None
+
+Training Hyper Parameters:
+checkpoint_dir = saved
+epochs = 300
+train_batch_size = 4096
+learner = adam
+learning_rate = 0.001
+eval_step = 1
+stopping_step = 10
+clip_grad_norm = None
+weight_decay = 0.0
+loss_decimal_place = 4
+
+Evaluation Hyper Parameters:
+eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'group_by': 'user', 'order': 'RO', 'mode': 'full'}
+metrics = ['Recall', 'NDCG']
+topk = [10, 20, 50]
+valid_metric = NDCG@10
+valid_metric_bigger = True
+eval_batch_size = 4096000
+metric_decimal_place = 4
+
+Dataset Hyper Parameters:
+field_separator = 	
+seq_separator =  
+USER_ID_FIELD = user_id
+ITEM_ID_FIELD = item_id
+RATING_FIELD = rating
+TIME_FIELD = timestamp
+seq_len = None
+LABEL_FIELD = label
+threshold = None
+NEG_PREFIX = neg_
+load_col = {'inter': ['user_id', 'item_id', 'rating'], 'item': ['item_id', 'movie_title']}
+unload_col = None
+unused_col = None
+additional_feat_suffix = None
+rm_dup_inter = None
+val_interval = {'rating': '[3,inf)'}
+filter_inter_by_user_or_item = True
+user_inter_num_interval = [0,inf)
+item_inter_num_interval = [0,inf)
+alias_of_user_id = None
+alias_of_item_id = None
+alias_of_entity_id = None
+alias_of_relation_id = None
+preload_weight = None
+normalize_field = None
+normalize_all = None
+ITEM_LIST_LENGTH_FIELD = item_length
+LIST_SUFFIX = _list
+MAX_ITEM_LIST_LENGTH = 50
+POSITION_FIELD = position_id
+HEAD_ENTITY_ID_FIELD = head_id
+TAIL_ENTITY_ID_FIELD = tail_id
+RELATION_ID_FIELD = relation_id
+ENTITY_ID_FIELD = entity_id
+
+Other Hyper Parameters: 
+neg_sampling = {'uniform': 1}
+repeatable = False
+MODEL_TYPE = ModelType.GENERAL
+eval_setting = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'RO', 'group_by': 'user', 'mode': 'full'}
+embedding_size = 64
+n_layers = 3
+reg_weight = 0.0001
+ssl_temp = 0.1
+ssl_reg = 1e-07
+hyper_layers = 1
+alpha = 1
+proto_reg = 8e-08
+num_clusters = 1000
+m_step = 1
+warm_up_step = 20
+MODEL_INPUT_TYPE = InputType.PAIRWISE
+eval_type = EvaluatorType.RANKING
+device = cuda
+train_neg_sample_args = {'strategy': 'by', 'by': 1, 'distribution': 'uniform'}
+eval_neg_sample_args = {'strategy': 'full', 'distribution': 'uniform'}
+svd = True
+mi = 11
+
+
+Thu 08 Aug 2024 14:24:51 INFO  ml-1m
+The number of users: 6040
+Average actions of users: 138.51266766020865
+The number of items: 3884
+Average actions of items: 230.56174200661522
+The number of inters: 836478
+The sparsity of the dataset: 96.43435285532085%
+Remain Fields: ['user_id', 'item_id', 'rating', 'movie_title']
+Thu 08 Aug 2024 14:24:52 INFO  [Training]: train_batch_size = [4096] negative sampling: [{'uniform': 1}]
+Thu 08 Aug 2024 14:24:52 INFO  [Evaluation]: eval_batch_size = [4096000] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'group_by': 'user', 'order': 'RO', 'mode': 'full'}]
+Thu 08 Aug 2024 14:25:20 INFO  SVD_MI(
+  (mf_loss): BPRLoss()
+  (reg_loss): EmbLoss()
+  (user_embedding): Embedding(6040, 64)
+  (item_embedding): Embedding(3884, 64)
+  (content_linear): ModuleList(
+    (0): Linear(in_features=768, out_features=64, bias=True)
+    (1): Linear(in_features=768, out_features=64, bias=True)
+    (2): Linear(in_features=768, out_features=64, bias=True)
+    (3): Linear(in_features=768, out_features=64, bias=True)
+    (4): Linear(in_features=768, out_features=64, bias=True)
+    (5): Linear(in_features=768, out_features=64, bias=True)
+    (6): Linear(in_features=768, out_features=64, bias=True)
+    (7): Linear(in_features=768, out_features=64, bias=True)
+    (8): Linear(in_features=768, out_features=64, bias=True)
+    (9): Linear(in_features=768, out_features=64, bias=True)
+    (10): Linear(in_features=768, out_features=64, bias=True)
+  )
+)
+Trainable parameters: 1176512
+Thu 08 Aug 2024 14:25:20 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:25:34 INFO  epoch 0 training [time: 11.39s, train_loss1: 114.2646, train_loss2: 0.2572]
+Thu 08 Aug 2024 14:25:34 INFO  epoch 0 evaluating [time: 0.14s, valid_score: 0.087600]
+Thu 08 Aug 2024 14:25:34 INFO  valid result: 
+recall@10 : 0.073    recall@20 : 0.128    recall@50 : 0.2368    ndcg@10 : 0.0876    ndcg@20 : 0.1013    ndcg@50 : 0.1357    
+Thu 08 Aug 2024 14:25:34 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:25:34 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:25:46 INFO  epoch 1 training [time: 10.96s, train_loss1: 113.9513, train_loss2: 0.2085]
+Thu 08 Aug 2024 14:25:46 INFO  epoch 1 evaluating [time: 0.12s, valid_score: 0.138200]
+Thu 08 Aug 2024 14:25:46 INFO  valid result: 
+recall@10 : 0.1109    recall@20 : 0.1792    recall@50 : 0.3043    ndcg@10 : 0.1382    ndcg@20 : 0.1521    ndcg@50 : 0.1908    
+Thu 08 Aug 2024 14:25:46 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:25:46 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:25:57 INFO  epoch 2 training [time: 10.64s, train_loss1: 90.8578, train_loss2: 0.8106]
+Thu 08 Aug 2024 14:25:57 INFO  epoch 2 evaluating [time: 0.12s, valid_score: 0.104900]
+Thu 08 Aug 2024 14:25:57 INFO  valid result: 
+recall@10 : 0.0779    recall@20 : 0.1297    recall@50 : 0.2256    ndcg@10 : 0.1049    ndcg@20 : 0.1148    ndcg@50 : 0.1433    
+Thu 08 Aug 2024 14:25:57 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:26:09 INFO  epoch 3 training [time: 10.73s, train_loss1: 53.9398, train_loss2: 1.0827]
+Thu 08 Aug 2024 14:26:09 INFO  epoch 3 evaluating [time: 0.13s, valid_score: 0.105300]
+Thu 08 Aug 2024 14:26:09 INFO  valid result: 
+recall@10 : 0.0782    recall@20 : 0.1294    recall@50 : 0.2263    ndcg@10 : 0.1053    ndcg@20 : 0.115    ndcg@50 : 0.1438    
+Thu 08 Aug 2024 14:26:09 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:26:20 INFO  epoch 4 training [time: 10.75s, train_loss1: 51.7434, train_loss2: 1.0852]
+Thu 08 Aug 2024 14:26:21 INFO  epoch 4 evaluating [time: 0.22s, valid_score: 0.107600]
+Thu 08 Aug 2024 14:26:21 INFO  valid result: 
+recall@10 : 0.0809    recall@20 : 0.1316    recall@50 : 0.2322    ndcg@10 : 0.1076    ndcg@20 : 0.1169    ndcg@50 : 0.147    
+Thu 08 Aug 2024 14:26:21 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:26:54 INFO  epoch 5 training [time: 31.94s, train_loss1: 50.1403, train_loss2: 1.0842]
+Thu 08 Aug 2024 14:26:54 INFO  epoch 5 evaluating [time: 0.12s, valid_score: 0.110900]
+Thu 08 Aug 2024 14:26:54 INFO  valid result: 
+recall@10 : 0.0841    recall@20 : 0.1365    recall@50 : 0.2412    ndcg@10 : 0.1109    ndcg@20 : 0.1207    ndcg@50 : 0.1521    
+Thu 08 Aug 2024 14:26:54 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:27:05 INFO  epoch 6 training [time: 10.80s, train_loss1: 48.0758, train_loss2: 1.0806]
+Thu 08 Aug 2024 14:27:06 INFO  epoch 6 evaluating [time: 0.13s, valid_score: 0.115700]
+Thu 08 Aug 2024 14:27:06 INFO  valid result: 
+recall@10 : 0.088    recall@20 : 0.1409    recall@50 : 0.2535    ndcg@10 : 0.1157    ndcg@20 : 0.1253    ndcg@50 : 0.1593    
+Thu 08 Aug 2024 14:27:06 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:27:17 INFO  epoch 7 training [time: 10.49s, train_loss1: 46.0477, train_loss2: 1.0764]
+Thu 08 Aug 2024 14:27:17 INFO  epoch 7 evaluating [time: 0.13s, valid_score: 0.121500]
+Thu 08 Aug 2024 14:27:17 INFO  valid result: 
+recall@10 : 0.0925    recall@20 : 0.1469    recall@50 : 0.2636    ndcg@10 : 0.1215    ndcg@20 : 0.1312    ndcg@50 : 0.1666    
+Thu 08 Aug 2024 14:27:17 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:27:55 INFO  epoch 8 training [time: 37.31s, train_loss1: 44.1358, train_loss2: 1.0726]
+Thu 08 Aug 2024 14:27:55 INFO  epoch 8 evaluating [time: 0.13s, valid_score: 0.127100]
+Thu 08 Aug 2024 14:27:55 INFO  valid result: 
+recall@10 : 0.0963    recall@20 : 0.1525    recall@50 : 0.2736    ndcg@10 : 0.1271    ndcg@20 : 0.1372    ndcg@50 : 0.1743    
+Thu 08 Aug 2024 14:27:55 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:28:06 INFO  epoch 9 training [time: 10.36s, train_loss1: 42.5384, train_loss2: 1.0697]
+Thu 08 Aug 2024 14:28:06 INFO  epoch 9 evaluating [time: 0.13s, valid_score: 0.132200]
+Thu 08 Aug 2024 14:28:06 INFO  valid result: 
+recall@10 : 0.0999    recall@20 : 0.1592    recall@50 : 0.2831    ndcg@10 : 0.1322    ndcg@20 : 0.1433    ndcg@50 : 0.1813    
+Thu 08 Aug 2024 14:28:06 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:28:17 INFO  epoch 10 training [time: 10.31s, train_loss1: 41.1110, train_loss2: 1.0671]
+Thu 08 Aug 2024 14:28:17 INFO  epoch 10 evaluating [time: 0.12s, valid_score: 0.137600]
+Thu 08 Aug 2024 14:28:17 INFO  valid result: 
+recall@10 : 0.1041    recall@20 : 0.1655    recall@50 : 0.2921    ndcg@10 : 0.1376    ndcg@20 : 0.149    ndcg@50 : 0.1879    
+Thu 08 Aug 2024 14:28:17 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:28:56 INFO  epoch 11 training [time: 38.49s, train_loss1: 39.8575, train_loss2: 1.0648]
+Thu 08 Aug 2024 14:28:56 INFO  epoch 11 evaluating [time: 0.14s, valid_score: 0.141300]
+Thu 08 Aug 2024 14:28:56 INFO  valid result: 
+recall@10 : 0.1066    recall@20 : 0.1697    recall@50 : 0.3009    ndcg@10 : 0.1413    ndcg@20 : 0.1533    ndcg@50 : 0.1934    
+Thu 08 Aug 2024 14:28:56 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:28:56 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:29:08 INFO  epoch 12 training [time: 10.77s, train_loss1: 39.0287, train_loss2: 1.0630]
+Thu 08 Aug 2024 14:29:08 INFO  epoch 12 evaluating [time: 0.13s, valid_score: 0.145700]
+Thu 08 Aug 2024 14:29:08 INFO  valid result: 
+recall@10 : 0.1103    recall@20 : 0.1743    recall@50 : 0.3085    ndcg@10 : 0.1457    ndcg@20 : 0.1577    ndcg@50 : 0.1985    
+Thu 08 Aug 2024 14:29:08 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:29:08 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:29:19 INFO  epoch 13 training [time: 10.72s, train_loss1: 38.1637, train_loss2: 1.0611]
+Thu 08 Aug 2024 14:29:19 INFO  epoch 13 evaluating [time: 0.13s, valid_score: 0.149000]
+Thu 08 Aug 2024 14:29:19 INFO  valid result: 
+recall@10 : 0.113    recall@20 : 0.1787    recall@50 : 0.3149    ndcg@10 : 0.149    ndcg@20 : 0.1618    ndcg@50 : 0.2033    
+Thu 08 Aug 2024 14:29:19 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:29:19 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:29:57 INFO  epoch 14 training [time: 37.22s, train_loss1: 37.2620, train_loss2: 1.0592]
+Thu 08 Aug 2024 14:29:57 INFO  epoch 14 evaluating [time: 0.13s, valid_score: 0.152000]
+Thu 08 Aug 2024 14:29:57 INFO  valid result: 
+recall@10 : 0.1149    recall@20 : 0.1826    recall@50 : 0.3198    ndcg@10 : 0.152    ndcg@20 : 0.1654    ndcg@50 : 0.2073    
+Thu 08 Aug 2024 14:29:57 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:29:57 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:30:09 INFO  epoch 15 training [time: 10.87s, train_loss1: 36.6378, train_loss2: 1.0569]
+Thu 08 Aug 2024 14:30:09 INFO  epoch 15 evaluating [time: 0.14s, valid_score: 0.155400]
+Thu 08 Aug 2024 14:30:09 INFO  valid result: 
+recall@10 : 0.1185    recall@20 : 0.1866    recall@50 : 0.3256    ndcg@10 : 0.1554    ndcg@20 : 0.1688    ndcg@50 : 0.2112    
+Thu 08 Aug 2024 14:30:09 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:30:09 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:30:21 INFO  epoch 16 training [time: 10.73s, train_loss1: 36.0574, train_loss2: 1.0548]
+Thu 08 Aug 2024 14:30:21 INFO  epoch 16 evaluating [time: 0.13s, valid_score: 0.158400]
+Thu 08 Aug 2024 14:30:21 INFO  valid result: 
+recall@10 : 0.1213    recall@20 : 0.1902    recall@50 : 0.3298    ndcg@10 : 0.1584    ndcg@20 : 0.1719    ndcg@50 : 0.2146    
+Thu 08 Aug 2024 14:30:21 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:30:21 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:30:59 INFO  epoch 17 training [time: 37.31s, train_loss1: 35.4933, train_loss2: 1.0521]
+Thu 08 Aug 2024 14:30:59 INFO  epoch 17 evaluating [time: 0.14s, valid_score: 0.161600]
+Thu 08 Aug 2024 14:30:59 INFO  valid result: 
+recall@10 : 0.1237    recall@20 : 0.1945    recall@50 : 0.3365    ndcg@10 : 0.1616    ndcg@20 : 0.1753    ndcg@50 : 0.2188    
+Thu 08 Aug 2024 14:30:59 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:30:59 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:31:11 INFO  epoch 18 training [time: 10.65s, train_loss1: 34.9322, train_loss2: 1.0494]
+Thu 08 Aug 2024 14:31:11 INFO  epoch 18 evaluating [time: 0.13s, valid_score: 0.164500]
+Thu 08 Aug 2024 14:31:11 INFO  valid result: 
+recall@10 : 0.1273    recall@20 : 0.1978    recall@50 : 0.3394    ndcg@10 : 0.1645    ndcg@20 : 0.1779    ndcg@50 : 0.2213    
+Thu 08 Aug 2024 14:31:11 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:31:11 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:31:22 INFO  epoch 19 training [time: 10.60s, train_loss1: 34.2448, train_loss2: 1.0465]
+Thu 08 Aug 2024 14:31:22 INFO  epoch 19 evaluating [time: 0.13s, valid_score: 0.166900]
+Thu 08 Aug 2024 14:31:22 INFO  valid result: 
+recall@10 : 0.13    recall@20 : 0.2013    recall@50 : 0.3452    ndcg@10 : 0.1669    ndcg@20 : 0.1806    ndcg@50 : 0.2246    
+Thu 08 Aug 2024 14:31:22 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:31:22 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:32:01 INFO  epoch 20 training [time: 37.77s, train_loss1: 33.8998, train_loss2: 1.0433, train_loss3: 0.2723]
+Thu 08 Aug 2024 14:32:01 INFO  epoch 20 evaluating [time: 0.12s, valid_score: 0.169800]
+Thu 08 Aug 2024 14:32:01 INFO  valid result: 
+recall@10 : 0.1329    recall@20 : 0.2043    recall@50 : 0.3485    ndcg@10 : 0.1698    ndcg@20 : 0.1832    ndcg@50 : 0.2274    
+Thu 08 Aug 2024 14:32:01 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:32:01 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:32:12 INFO  epoch 21 training [time: 10.90s, train_loss1: 33.4343, train_loss2: 1.0399, train_loss3: 0.2679]
+Thu 08 Aug 2024 14:32:13 INFO  epoch 21 evaluating [time: 0.13s, valid_score: 0.171800]
+Thu 08 Aug 2024 14:32:13 INFO  valid result: 
+recall@10 : 0.1342    recall@20 : 0.2071    recall@50 : 0.3517    ndcg@10 : 0.1718    ndcg@20 : 0.1856    ndcg@50 : 0.2299    
+Thu 08 Aug 2024 14:32:13 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:32:13 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:32:24 INFO  epoch 22 training [time: 10.90s, train_loss1: 33.0021, train_loss2: 1.0362, train_loss3: 0.2636]
+Thu 08 Aug 2024 14:32:51 INFO  epoch 22 evaluating [time: 26.97s, valid_score: 0.174400]
+Thu 08 Aug 2024 14:32:51 INFO  valid result: 
+recall@10 : 0.1362    recall@20 : 0.2105    recall@50 : 0.357    ndcg@10 : 0.1744    ndcg@20 : 0.1886    ndcg@50 : 0.2335    
+Thu 08 Aug 2024 14:32:51 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:32:51 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:33:03 INFO  epoch 23 training [time: 11.07s, train_loss1: 32.5426, train_loss2: 1.0325, train_loss3: 0.2587]
+Thu 08 Aug 2024 14:33:03 INFO  epoch 23 evaluating [time: 0.13s, valid_score: 0.177200]
+Thu 08 Aug 2024 14:33:03 INFO  valid result: 
+recall@10 : 0.1392    recall@20 : 0.2145    recall@50 : 0.3619    ndcg@10 : 0.1772    ndcg@20 : 0.1915    ndcg@50 : 0.2367    
+Thu 08 Aug 2024 14:33:03 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:33:03 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:33:14 INFO  epoch 24 training [time: 10.87s, train_loss1: 32.1152, train_loss2: 1.0290, train_loss3: 0.2552]
+Thu 08 Aug 2024 14:33:14 INFO  epoch 24 evaluating [time: 0.12s, valid_score: 0.179100]
+Thu 08 Aug 2024 14:33:14 INFO  valid result: 
+recall@10 : 0.1409    recall@20 : 0.2169    recall@50 : 0.3656    ndcg@10 : 0.1791    ndcg@20 : 0.1938    ndcg@50 : 0.2393    
+Thu 08 Aug 2024 14:33:14 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:33:14 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:33:52 INFO  epoch 25 training [time: 36.52s, train_loss1: 31.8773, train_loss2: 1.0252, train_loss3: 0.2508]
+Thu 08 Aug 2024 14:33:52 INFO  epoch 25 evaluating [time: 0.13s, valid_score: 0.181400]
+Thu 08 Aug 2024 14:33:52 INFO  valid result: 
+recall@10 : 0.1431    recall@20 : 0.2199    recall@50 : 0.369    ndcg@10 : 0.1814    ndcg@20 : 0.196    ndcg@50 : 0.2418    
+Thu 08 Aug 2024 14:33:52 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:33:52 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:34:03 INFO  epoch 26 training [time: 10.88s, train_loss1: 31.4101, train_loss2: 1.0212, train_loss3: 0.2470]
+Thu 08 Aug 2024 14:34:03 INFO  epoch 26 evaluating [time: 0.13s, valid_score: 0.183800]
+Thu 08 Aug 2024 14:34:03 INFO  valid result: 
+recall@10 : 0.1458    recall@20 : 0.2218    recall@50 : 0.3721    ndcg@10 : 0.1838    ndcg@20 : 0.1979    ndcg@50 : 0.2441    
+Thu 08 Aug 2024 14:34:03 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:34:03 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:34:15 INFO  epoch 27 training [time: 11.02s, train_loss1: 31.2424, train_loss2: 1.0173, train_loss3: 0.2427]
+Thu 08 Aug 2024 14:34:15 INFO  epoch 27 evaluating [time: 0.12s, valid_score: 0.186000]
+Thu 08 Aug 2024 14:34:15 INFO  valid result: 
+recall@10 : 0.1475    recall@20 : 0.2254    recall@50 : 0.3754    ndcg@10 : 0.186    ndcg@20 : 0.2006    ndcg@50 : 0.2467    
+Thu 08 Aug 2024 14:34:15 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:34:15 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:34:53 INFO  epoch 28 training [time: 36.66s, train_loss1: 30.8626, train_loss2: 1.0133, train_loss3: 0.2401]
+Thu 08 Aug 2024 14:34:53 INFO  epoch 28 evaluating [time: 0.13s, valid_score: 0.187600]
+Thu 08 Aug 2024 14:34:53 INFO  valid result: 
+recall@10 : 0.1493    recall@20 : 0.227    recall@50 : 0.3781    ndcg@10 : 0.1876    ndcg@20 : 0.2024    ndcg@50 : 0.2489    
+Thu 08 Aug 2024 14:34:53 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:34:53 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:35:04 INFO  epoch 29 training [time: 10.92s, train_loss1: 30.4508, train_loss2: 1.0095, train_loss3: 0.2370]
+Thu 08 Aug 2024 14:35:04 INFO  epoch 29 evaluating [time: 0.13s, valid_score: 0.189500]
+Thu 08 Aug 2024 14:35:04 INFO  valid result: 
+recall@10 : 0.1508    recall@20 : 0.2302    recall@50 : 0.3802    ndcg@10 : 0.1895    ndcg@20 : 0.2046    ndcg@50 : 0.2509    
+Thu 08 Aug 2024 14:35:04 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:35:04 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:35:16 INFO  epoch 30 training [time: 11.09s, train_loss1: 30.0651, train_loss2: 1.0055, train_loss3: 0.2353]
+Thu 08 Aug 2024 14:35:16 INFO  epoch 30 evaluating [time: 0.13s, valid_score: 0.191000]
+Thu 08 Aug 2024 14:35:16 INFO  valid result: 
+recall@10 : 0.1523    recall@20 : 0.2326    recall@50 : 0.3831    ndcg@10 : 0.191    ndcg@20 : 0.2066    ndcg@50 : 0.2528    
+Thu 08 Aug 2024 14:35:16 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:35:16 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:35:54 INFO  epoch 31 training [time: 36.87s, train_loss1: 29.8951, train_loss2: 1.0016, train_loss3: 0.2326]
+Thu 08 Aug 2024 14:35:54 INFO  epoch 31 evaluating [time: 0.13s, valid_score: 0.192500]
+Thu 08 Aug 2024 14:35:54 INFO  valid result: 
+recall@10 : 0.1538    recall@20 : 0.2352    recall@50 : 0.3858    ndcg@10 : 0.1925    ndcg@20 : 0.2084    ndcg@50 : 0.2547    
+Thu 08 Aug 2024 14:35:54 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:35:54 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:36:07 INFO  epoch 32 training [time: 11.12s, train_loss1: 29.4917, train_loss2: 0.9977, train_loss3: 0.2305]
+Thu 08 Aug 2024 14:36:07 INFO  epoch 32 evaluating [time: 0.13s, valid_score: 0.193700]
+Thu 08 Aug 2024 14:36:07 INFO  valid result: 
+recall@10 : 0.1547    recall@20 : 0.2364    recall@50 : 0.3878    ndcg@10 : 0.1937    ndcg@20 : 0.2097    ndcg@50 : 0.2563    
+Thu 08 Aug 2024 14:36:07 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:36:07 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:36:18 INFO  epoch 33 training [time: 11.04s, train_loss1: 29.3455, train_loss2: 0.9940, train_loss3: 0.2276]
+Thu 08 Aug 2024 14:36:19 INFO  epoch 33 evaluating [time: 0.12s, valid_score: 0.194800]
+Thu 08 Aug 2024 14:36:19 INFO  valid result: 
+recall@10 : 0.1564    recall@20 : 0.239    recall@50 : 0.3896    ndcg@10 : 0.1948    ndcg@20 : 0.2111    ndcg@50 : 0.2574    
+Thu 08 Aug 2024 14:36:19 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:36:19 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:36:55 INFO  epoch 34 training [time: 35.23s, train_loss1: 29.0334, train_loss2: 0.9903, train_loss3: 0.2252]
+Thu 08 Aug 2024 14:36:55 INFO  epoch 34 evaluating [time: 0.12s, valid_score: 0.195800]
+Thu 08 Aug 2024 14:36:55 INFO  valid result: 
+recall@10 : 0.1573    recall@20 : 0.2405    recall@50 : 0.3917    ndcg@10 : 0.1958    ndcg@20 : 0.2123    ndcg@50 : 0.2587    
+Thu 08 Aug 2024 14:36:55 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:36:55 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:37:07 INFO  epoch 35 training [time: 10.96s, train_loss1: 28.9584, train_loss2: 0.9866, train_loss3: 0.2238]
+Thu 08 Aug 2024 14:37:08 INFO  epoch 35 evaluating [time: 0.14s, valid_score: 0.197100]
+Thu 08 Aug 2024 14:37:08 INFO  valid result: 
+recall@10 : 0.1583    recall@20 : 0.2421    recall@50 : 0.3936    ndcg@10 : 0.1971    ndcg@20 : 0.2139    ndcg@50 : 0.2604    
+Thu 08 Aug 2024 14:37:08 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:37:08 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:37:20 INFO  epoch 36 training [time: 11.33s, train_loss1: 28.5735, train_loss2: 0.9829, train_loss3: 0.2220]
+Thu 08 Aug 2024 14:37:20 INFO  epoch 36 evaluating [time: 0.13s, valid_score: 0.198300]
+Thu 08 Aug 2024 14:37:20 INFO  valid result: 
+recall@10 : 0.159    recall@20 : 0.2429    recall@50 : 0.3953    ndcg@10 : 0.1983    ndcg@20 : 0.215    ndcg@50 : 0.2618    
+Thu 08 Aug 2024 14:37:20 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:37:20 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:37:57 INFO  epoch 37 training [time: 36.79s, train_loss1: 28.4844, train_loss2: 0.9794, train_loss3: 0.2195]
+Thu 08 Aug 2024 14:37:57 INFO  epoch 37 evaluating [time: 0.15s, valid_score: 0.198500]
+Thu 08 Aug 2024 14:37:57 INFO  valid result: 
+recall@10 : 0.1595    recall@20 : 0.2439    recall@50 : 0.3966    ndcg@10 : 0.1985    ndcg@20 : 0.2155    ndcg@50 : 0.2625    
+Thu 08 Aug 2024 14:37:57 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:37:57 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:38:09 INFO  epoch 38 training [time: 11.37s, train_loss1: 28.3416, train_loss2: 0.9759, train_loss3: 0.2183]
+Thu 08 Aug 2024 14:38:09 INFO  epoch 38 evaluating [time: 0.13s, valid_score: 0.199700]
+Thu 08 Aug 2024 14:38:09 INFO  valid result: 
+recall@10 : 0.1605    recall@20 : 0.2454    recall@50 : 0.3989    ndcg@10 : 0.1997    ndcg@20 : 0.2167    ndcg@50 : 0.264    
+Thu 08 Aug 2024 14:38:10 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:38:10 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:38:21 INFO  epoch 39 training [time: 11.46s, train_loss1: 28.0903, train_loss2: 0.9726, train_loss3: 0.2165]
+Thu 08 Aug 2024 14:38:22 INFO  epoch 39 evaluating [time: 0.13s, valid_score: 0.200600]
+Thu 08 Aug 2024 14:38:22 INFO  valid result: 
+recall@10 : 0.1618    recall@20 : 0.2465    recall@50 : 0.4002    ndcg@10 : 0.2006    ndcg@20 : 0.2176    ndcg@50 : 0.2649    
+Thu 08 Aug 2024 14:38:22 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:38:22 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:38:58 INFO  epoch 40 training [time: 36.36s, train_loss1: 27.6355, train_loss2: 0.9696, train_loss3: 0.2157]
+Thu 08 Aug 2024 14:38:59 INFO  epoch 40 evaluating [time: 0.24s, valid_score: 0.201600]
+Thu 08 Aug 2024 14:38:59 INFO  valid result: 
+recall@10 : 0.1623    recall@20 : 0.2469    recall@50 : 0.4012    ndcg@10 : 0.2016    ndcg@20 : 0.2182    ndcg@50 : 0.2656    
+Thu 08 Aug 2024 14:38:59 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:38:59 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:39:11 INFO  epoch 41 training [time: 11.42s, train_loss1: 27.6321, train_loss2: 0.9663, train_loss3: 0.2144]
+Thu 08 Aug 2024 14:39:11 INFO  epoch 41 evaluating [time: 0.14s, valid_score: 0.202000]
+Thu 08 Aug 2024 14:39:11 INFO  valid result: 
+recall@10 : 0.1629    recall@20 : 0.2479    recall@50 : 0.403    ndcg@10 : 0.202    ndcg@20 : 0.219    ndcg@50 : 0.2667    
+Thu 08 Aug 2024 14:39:11 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:39:11 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:39:23 INFO  epoch 42 training [time: 11.51s, train_loss1: 27.4888, train_loss2: 0.9632, train_loss3: 0.2125]
+Thu 08 Aug 2024 14:39:23 INFO  epoch 42 evaluating [time: 0.13s, valid_score: 0.203000]
+Thu 08 Aug 2024 14:39:23 INFO  valid result: 
+recall@10 : 0.1641    recall@20 : 0.248    recall@50 : 0.4048    ndcg@10 : 0.203    ndcg@20 : 0.2195    ndcg@50 : 0.2677    
+Thu 08 Aug 2024 14:39:23 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:39:23 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:40:00 INFO  epoch 43 training [time: 36.30s, train_loss1: 27.3632, train_loss2: 0.9599, train_loss3: 0.2105]
+Thu 08 Aug 2024 14:40:01 INFO  epoch 43 evaluating [time: 0.15s, valid_score: 0.203500]
+Thu 08 Aug 2024 14:40:01 INFO  valid result: 
+recall@10 : 0.1641    recall@20 : 0.2488    recall@50 : 0.4059    ndcg@10 : 0.2035    ndcg@20 : 0.2203    ndcg@50 : 0.2685    
+Thu 08 Aug 2024 14:40:01 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:40:01 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:40:13 INFO  epoch 44 training [time: 11.48s, train_loss1: 27.0528, train_loss2: 0.9570, train_loss3: 0.2092]
+Thu 08 Aug 2024 14:40:13 INFO  epoch 44 evaluating [time: 0.15s, valid_score: 0.203400]
+Thu 08 Aug 2024 14:40:13 INFO  valid result: 
+recall@10 : 0.1641    recall@20 : 0.2494    recall@50 : 0.4075    ndcg@10 : 0.2034    ndcg@20 : 0.2204    ndcg@50 : 0.2689    
+Thu 08 Aug 2024 14:40:13 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:40:25 INFO  epoch 45 training [time: 11.42s, train_loss1: 26.9499, train_loss2: 0.9538, train_loss3: 0.2080]
+Thu 08 Aug 2024 14:40:25 INFO  epoch 45 evaluating [time: 0.14s, valid_score: 0.204200]
+Thu 08 Aug 2024 14:40:25 INFO  valid result: 
+recall@10 : 0.1644    recall@20 : 0.2496    recall@50 : 0.4091    ndcg@10 : 0.2042    ndcg@20 : 0.2211    ndcg@50 : 0.27    
+Thu 08 Aug 2024 14:40:25 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:40:25 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:41:03 INFO  epoch 46 training [time: 37.20s, train_loss1: 26.7607, train_loss2: 0.9509, train_loss3: 0.2067]
+Thu 08 Aug 2024 14:41:03 INFO  epoch 46 evaluating [time: 0.13s, valid_score: 0.204600]
+Thu 08 Aug 2024 14:41:03 INFO  valid result: 
+recall@10 : 0.1641    recall@20 : 0.2501    recall@50 : 0.4094    ndcg@10 : 0.2046    ndcg@20 : 0.2218    ndcg@50 : 0.2706    
+Thu 08 Aug 2024 14:41:03 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:41:03 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:41:16 INFO  epoch 47 training [time: 11.96s, train_loss1: 26.6398, train_loss2: 0.9478, train_loss3: 0.2056]
+Thu 08 Aug 2024 14:41:16 INFO  epoch 47 evaluating [time: 0.14s, valid_score: 0.205100]
+Thu 08 Aug 2024 14:41:16 INFO  valid result: 
+recall@10 : 0.1648    recall@20 : 0.2508    recall@50 : 0.4099    ndcg@10 : 0.2051    ndcg@20 : 0.2223    ndcg@50 : 0.2711    
+Thu 08 Aug 2024 14:41:16 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:41:16 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:41:51 INFO  epoch 48 training [time: 33.98s, train_loss1: 26.6026, train_loss2: 0.9448, train_loss3: 0.2058]
+Thu 08 Aug 2024 14:41:51 INFO  epoch 48 evaluating [time: 0.14s, valid_score: 0.205800]
+Thu 08 Aug 2024 14:41:51 INFO  valid result: 
+recall@10 : 0.1657    recall@20 : 0.2508    recall@50 : 0.4106    ndcg@10 : 0.2058    ndcg@20 : 0.2227    ndcg@50 : 0.2717    
+Thu 08 Aug 2024 14:41:51 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:41:51 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:42:04 INFO  epoch 49 training [time: 11.92s, train_loss1: 26.4467, train_loss2: 0.9422, train_loss3: 0.2041]
+Thu 08 Aug 2024 14:42:04 INFO  epoch 49 evaluating [time: 0.14s, valid_score: 0.206000]
+Thu 08 Aug 2024 14:42:04 INFO  valid result: 
+recall@10 : 0.1657    recall@20 : 0.2518    recall@50 : 0.4107    ndcg@10 : 0.206    ndcg@20 : 0.2231    ndcg@50 : 0.2719    
+Thu 08 Aug 2024 14:42:04 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:42:04 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:42:17 INFO  epoch 50 training [time: 12.39s, train_loss1: 26.1431, train_loss2: 0.9397, train_loss3: 0.2028]
+Thu 08 Aug 2024 14:42:18 INFO  epoch 50 evaluating [time: 0.13s, valid_score: 0.206500]
+Thu 08 Aug 2024 14:42:18 INFO  valid result: 
+recall@10 : 0.166    recall@20 : 0.2529    recall@50 : 0.4116    ndcg@10 : 0.2065    ndcg@20 : 0.2237    ndcg@50 : 0.2723    
+Thu 08 Aug 2024 14:42:18 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:42:18 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:42:52 INFO  epoch 51 training [time: 34.06s, train_loss1: 26.1127, train_loss2: 0.9369, train_loss3: 0.2023]
+Thu 08 Aug 2024 14:42:52 INFO  epoch 51 evaluating [time: 0.14s, valid_score: 0.206900]
+Thu 08 Aug 2024 14:42:52 INFO  valid result: 
+recall@10 : 0.1667    recall@20 : 0.2541    recall@50 : 0.4121    ndcg@10 : 0.2069    ndcg@20 : 0.224    ndcg@50 : 0.2725    
+Thu 08 Aug 2024 14:42:52 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:42:52 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:43:05 INFO  epoch 52 training [time: 11.94s, train_loss1: 26.0254, train_loss2: 0.9341, train_loss3: 0.2003]
+Thu 08 Aug 2024 14:43:05 INFO  epoch 52 evaluating [time: 0.13s, valid_score: 0.207400]
+Thu 08 Aug 2024 14:43:05 INFO  valid result: 
+recall@10 : 0.1676    recall@20 : 0.254    recall@50 : 0.4134    ndcg@10 : 0.2074    ndcg@20 : 0.2242    ndcg@50 : 0.2731    
+Thu 08 Aug 2024 14:43:05 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:43:05 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:43:18 INFO  epoch 53 training [time: 11.97s, train_loss1: 25.9393, train_loss2: 0.9317, train_loss3: 0.1997]
+Thu 08 Aug 2024 14:43:18 INFO  epoch 53 evaluating [time: 0.12s, valid_score: 0.207200]
+Thu 08 Aug 2024 14:43:18 INFO  valid result: 
+recall@10 : 0.1674    recall@20 : 0.2547    recall@50 : 0.4137    ndcg@10 : 0.2072    ndcg@20 : 0.2246    ndcg@50 : 0.2734    
+Thu 08 Aug 2024 14:43:18 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:43:54 INFO  epoch 54 training [time: 34.59s, train_loss1: 25.8805, train_loss2: 0.9291, train_loss3: 0.1991]
+Thu 08 Aug 2024 14:43:54 INFO  epoch 54 evaluating [time: 0.14s, valid_score: 0.207800]
+Thu 08 Aug 2024 14:43:54 INFO  valid result: 
+recall@10 : 0.1677    recall@20 : 0.2548    recall@50 : 0.4145    ndcg@10 : 0.2078    ndcg@20 : 0.2248    ndcg@50 : 0.2739    
+Thu 08 Aug 2024 14:43:54 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:43:54 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:44:07 INFO  epoch 55 training [time: 12.50s, train_loss1: 25.6964, train_loss2: 0.9268, train_loss3: 0.1977]
+Thu 08 Aug 2024 14:44:08 INFO  epoch 55 evaluating [time: 0.14s, valid_score: 0.208000]
+Thu 08 Aug 2024 14:44:08 INFO  valid result: 
+recall@10 : 0.1677    recall@20 : 0.2553    recall@50 : 0.4148    ndcg@10 : 0.208    ndcg@20 : 0.2253    ndcg@50 : 0.2744    
+Thu 08 Aug 2024 14:44:08 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:44:08 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:44:20 INFO  epoch 56 training [time: 11.97s, train_loss1: 25.6105, train_loss2: 0.9243, train_loss3: 0.1982]
+Thu 08 Aug 2024 14:44:20 INFO  epoch 56 evaluating [time: 0.15s, valid_score: 0.208000]
+Thu 08 Aug 2024 14:44:20 INFO  valid result: 
+recall@10 : 0.1673    recall@20 : 0.2558    recall@50 : 0.4163    ndcg@10 : 0.208    ndcg@20 : 0.2254    ndcg@50 : 0.2747    
+Thu 08 Aug 2024 14:44:20 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:44:55 INFO  epoch 57 training [time: 33.90s, train_loss1: 25.4130, train_loss2: 0.9221, train_loss3: 0.1967]
+Thu 08 Aug 2024 14:44:55 INFO  epoch 57 evaluating [time: 0.13s, valid_score: 0.207400]
+Thu 08 Aug 2024 14:44:55 INFO  valid result: 
+recall@10 : 0.1669    recall@20 : 0.2567    recall@50 : 0.4166    ndcg@10 : 0.2074    ndcg@20 : 0.2255    ndcg@50 : 0.2747    
+Thu 08 Aug 2024 14:44:55 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:45:07 INFO  epoch 58 training [time: 11.72s, train_loss1: 25.3869, train_loss2: 0.9197, train_loss3: 0.1971]
+Thu 08 Aug 2024 14:45:07 INFO  epoch 58 evaluating [time: 0.13s, valid_score: 0.207800]
+Thu 08 Aug 2024 14:45:07 INFO  valid result: 
+recall@10 : 0.167    recall@20 : 0.2573    recall@50 : 0.4166    ndcg@10 : 0.2078    ndcg@20 : 0.2259    ndcg@50 : 0.275    
+Thu 08 Aug 2024 14:45:07 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:45:20 INFO  epoch 59 training [time: 11.68s, train_loss1: 25.3128, train_loss2: 0.9173, train_loss3: 0.1964]
+Thu 08 Aug 2024 14:45:20 INFO  epoch 59 evaluating [time: 0.23s, valid_score: 0.207900]
+Thu 08 Aug 2024 14:45:20 INFO  valid result: 
+recall@10 : 0.1676    recall@20 : 0.2583    recall@50 : 0.4173    ndcg@10 : 0.2079    ndcg@20 : 0.2263    ndcg@50 : 0.2753    
+Thu 08 Aug 2024 14:45:20 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:45:56 INFO  epoch 60 training [time: 35.49s, train_loss1: 25.2705, train_loss2: 0.9149, train_loss3: 0.1950]
+Thu 08 Aug 2024 14:45:56 INFO  epoch 60 evaluating [time: 0.15s, valid_score: 0.208100]
+Thu 08 Aug 2024 14:45:56 INFO  valid result: 
+recall@10 : 0.1676    recall@20 : 0.2584    recall@50 : 0.4175    ndcg@10 : 0.2081    ndcg@20 : 0.2266    ndcg@50 : 0.2755    
+Thu 08 Aug 2024 14:45:57 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:45:57 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:46:10 INFO  epoch 61 training [time: 12.50s, train_loss1: 25.2629, train_loss2: 0.9128, train_loss3: 0.1952]
+Thu 08 Aug 2024 14:46:10 INFO  epoch 61 evaluating [time: 0.14s, valid_score: 0.208500]
+Thu 08 Aug 2024 14:46:10 INFO  valid result: 
+recall@10 : 0.1679    recall@20 : 0.2584    recall@50 : 0.4184    ndcg@10 : 0.2085    ndcg@20 : 0.2269    ndcg@50 : 0.276    
+Thu 08 Aug 2024 14:46:10 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:46:10 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:46:23 INFO  epoch 62 training [time: 12.39s, train_loss1: 24.9462, train_loss2: 0.9108, train_loss3: 0.1941]
+Thu 08 Aug 2024 14:46:23 INFO  epoch 62 evaluating [time: 0.15s, valid_score: 0.208700]
+Thu 08 Aug 2024 14:46:23 INFO  valid result: 
+recall@10 : 0.1679    recall@20 : 0.2588    recall@50 : 0.418    ndcg@10 : 0.2087    ndcg@20 : 0.2272    ndcg@50 : 0.2763    
+Thu 08 Aug 2024 14:46:23 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:46:23 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:46:58 INFO  epoch 63 training [time: 34.10s, train_loss1: 24.9159, train_loss2: 0.9087, train_loss3: 0.1939]
+Thu 08 Aug 2024 14:46:58 INFO  epoch 63 evaluating [time: 0.14s, valid_score: 0.208900]
+Thu 08 Aug 2024 14:46:58 INFO  valid result: 
+recall@10 : 0.1682    recall@20 : 0.2592    recall@50 : 0.4185    ndcg@10 : 0.2089    ndcg@20 : 0.2274    ndcg@50 : 0.2764    
+Thu 08 Aug 2024 14:46:58 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:46:58 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:47:11 INFO  epoch 64 training [time: 12.37s, train_loss1: 24.8296, train_loss2: 0.9067, train_loss3: 0.1928]
+Thu 08 Aug 2024 14:47:11 INFO  epoch 64 evaluating [time: 0.14s, valid_score: 0.208900]
+Thu 08 Aug 2024 14:47:11 INFO  valid result: 
+recall@10 : 0.1685    recall@20 : 0.2595    recall@50 : 0.4189    ndcg@10 : 0.2089    ndcg@20 : 0.2275    ndcg@50 : 0.2766    
+Thu 08 Aug 2024 14:47:11 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:47:24 INFO  epoch 65 training [time: 12.29s, train_loss1: 24.7084, train_loss2: 0.9047, train_loss3: 0.1920]
+Thu 08 Aug 2024 14:47:24 INFO  epoch 65 evaluating [time: 0.14s, valid_score: 0.209000]
+Thu 08 Aug 2024 14:47:24 INFO  valid result: 
+recall@10 : 0.1687    recall@20 : 0.2594    recall@50 : 0.419    ndcg@10 : 0.209    ndcg@20 : 0.2274    ndcg@50 : 0.2765    
+Thu 08 Aug 2024 14:47:24 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:47:24 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:47:59 INFO  epoch 66 training [time: 33.93s, train_loss1: 24.5918, train_loss2: 0.9027, train_loss3: 0.1910]
+Thu 08 Aug 2024 14:47:59 INFO  epoch 66 evaluating [time: 0.14s, valid_score: 0.209200]
+Thu 08 Aug 2024 14:47:59 INFO  valid result: 
+recall@10 : 0.1691    recall@20 : 0.2599    recall@50 : 0.4193    ndcg@10 : 0.2092    ndcg@20 : 0.2275    ndcg@50 : 0.2766    
+Thu 08 Aug 2024 14:47:59 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:47:59 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:48:12 INFO  epoch 67 training [time: 11.81s, train_loss1: 24.5875, train_loss2: 0.9008, train_loss3: 0.1910]
+Thu 08 Aug 2024 14:48:12 INFO  epoch 67 evaluating [time: 0.13s, valid_score: 0.209500]
+Thu 08 Aug 2024 14:48:12 INFO  valid result: 
+recall@10 : 0.1697    recall@20 : 0.2601    recall@50 : 0.42    ndcg@10 : 0.2095    ndcg@20 : 0.2277    ndcg@50 : 0.2769    
+Thu 08 Aug 2024 14:48:12 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:48:12 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:48:24 INFO  epoch 68 training [time: 12.08s, train_loss1: 24.6131, train_loss2: 0.8987, train_loss3: 0.1908]
+Thu 08 Aug 2024 14:48:25 INFO  epoch 68 evaluating [time: 0.13s, valid_score: 0.209600]
+Thu 08 Aug 2024 14:48:25 INFO  valid result: 
+recall@10 : 0.1698    recall@20 : 0.2596    recall@50 : 0.4206    ndcg@10 : 0.2096    ndcg@20 : 0.2276    ndcg@50 : 0.2772    
+Thu 08 Aug 2024 14:48:25 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:48:25 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:49:01 INFO  epoch 69 training [time: 35.62s, train_loss1: 24.4251, train_loss2: 0.8969, train_loss3: 0.1900]
+Thu 08 Aug 2024 14:49:01 INFO  epoch 69 evaluating [time: 0.14s, valid_score: 0.209600]
+Thu 08 Aug 2024 14:49:01 INFO  valid result: 
+recall@10 : 0.1695    recall@20 : 0.2597    recall@50 : 0.4217    ndcg@10 : 0.2096    ndcg@20 : 0.2278    ndcg@50 : 0.2776    
+Thu 08 Aug 2024 14:49:01 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:49:12 INFO  epoch 70 training [time: 11.11s, train_loss1: 24.2868, train_loss2: 0.8948, train_loss3: 0.1895]
+Thu 08 Aug 2024 14:49:12 INFO  epoch 70 evaluating [time: 0.12s, valid_score: 0.209700]
+Thu 08 Aug 2024 14:49:12 INFO  valid result: 
+recall@10 : 0.1695    recall@20 : 0.259    recall@50 : 0.4215    ndcg@10 : 0.2097    ndcg@20 : 0.2277    ndcg@50 : 0.2777    
+Thu 08 Aug 2024 14:49:12 INFO  Saving current best: saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:49:12 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:49:24 INFO  epoch 71 training [time: 11.10s, train_loss1: 24.1813, train_loss2: 0.8931, train_loss3: 0.1887]
+Thu 08 Aug 2024 14:49:51 INFO  epoch 71 evaluating [time: 26.79s, valid_score: 0.209600]
+Thu 08 Aug 2024 14:49:51 INFO  valid result: 
+recall@10 : 0.1695    recall@20 : 0.259    recall@50 : 0.4212    ndcg@10 : 0.2096    ndcg@20 : 0.2276    ndcg@50 : 0.2776    
+Thu 08 Aug 2024 14:49:51 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:50:03 INFO  epoch 72 training [time: 11.15s, train_loss1: 24.1419, train_loss2: 0.8913, train_loss3: 0.1883]
+Thu 08 Aug 2024 14:50:03 INFO  epoch 72 evaluating [time: 0.13s, valid_score: 0.209100]
+Thu 08 Aug 2024 14:50:03 INFO  valid result: 
+recall@10 : 0.1692    recall@20 : 0.2599    recall@50 : 0.4218    ndcg@10 : 0.2091    ndcg@20 : 0.2276    ndcg@50 : 0.2775    
+Thu 08 Aug 2024 14:50:03 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:50:14 INFO  epoch 73 training [time: 11.10s, train_loss1: 24.1348, train_loss2: 0.8895, train_loss3: 0.1873]
+Thu 08 Aug 2024 14:50:14 INFO  epoch 73 evaluating [time: 0.14s, valid_score: 0.209000]
+Thu 08 Aug 2024 14:50:14 INFO  valid result: 
+recall@10 : 0.1691    recall@20 : 0.2593    recall@50 : 0.4217    ndcg@10 : 0.209    ndcg@20 : 0.2274    ndcg@50 : 0.2775    
+Thu 08 Aug 2024 14:50:14 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:50:52 INFO  epoch 74 training [time: 36.84s, train_loss1: 23.9757, train_loss2: 0.8878, train_loss3: 0.1873]
+Thu 08 Aug 2024 14:50:52 INFO  epoch 74 evaluating [time: 0.13s, valid_score: 0.209200]
+Thu 08 Aug 2024 14:50:52 INFO  valid result: 
+recall@10 : 0.1693    recall@20 : 0.2593    recall@50 : 0.4219    ndcg@10 : 0.2092    ndcg@20 : 0.2274    ndcg@50 : 0.2775    
+Thu 08 Aug 2024 14:50:52 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:51:04 INFO  epoch 75 training [time: 11.37s, train_loss1: 23.8054, train_loss2: 0.8864, train_loss3: 0.1866]
+Thu 08 Aug 2024 14:51:04 INFO  epoch 75 evaluating [time: 0.14s, valid_score: 0.209600]
+Thu 08 Aug 2024 14:51:04 INFO  valid result: 
+recall@10 : 0.1698    recall@20 : 0.26    recall@50 : 0.4225    ndcg@10 : 0.2096    ndcg@20 : 0.2279    ndcg@50 : 0.2779    
+Thu 08 Aug 2024 14:51:04 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:51:16 INFO  epoch 76 training [time: 11.35s, train_loss1: 23.8060, train_loss2: 0.8847, train_loss3: 0.1862]
+Thu 08 Aug 2024 14:51:16 INFO  epoch 76 evaluating [time: 0.13s, valid_score: 0.209000]
+Thu 08 Aug 2024 14:51:16 INFO  valid result: 
+recall@10 : 0.1691    recall@20 : 0.2602    recall@50 : 0.4227    ndcg@10 : 0.209    ndcg@20 : 0.2279    ndcg@50 : 0.2779    
+Thu 08 Aug 2024 14:51:16 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:51:52 INFO  epoch 77 training [time: 35.42s, train_loss1: 23.7068, train_loss2: 0.8830, train_loss3: 0.1852]
+Thu 08 Aug 2024 14:51:53 INFO  epoch 77 evaluating [time: 0.23s, valid_score: 0.209100]
+Thu 08 Aug 2024 14:51:53 INFO  valid result: 
+recall@10 : 0.1692    recall@20 : 0.2603    recall@50 : 0.4231    ndcg@10 : 0.2091    ndcg@20 : 0.2279    ndcg@50 : 0.278    
+Thu 08 Aug 2024 14:51:53 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:52:05 INFO  epoch 78 training [time: 11.36s, train_loss1: 23.7300, train_loss2: 0.8810, train_loss3: 0.1847]
+Thu 08 Aug 2024 14:52:05 INFO  epoch 78 evaluating [time: 0.13s, valid_score: 0.209300]
+Thu 08 Aug 2024 14:52:05 INFO  valid result: 
+recall@10 : 0.1695    recall@20 : 0.2604    recall@50 : 0.4237    ndcg@10 : 0.2093    ndcg@20 : 0.2279    ndcg@50 : 0.2781    
+Thu 08 Aug 2024 14:52:05 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:52:17 INFO  epoch 79 training [time: 11.31s, train_loss1: 23.7260, train_loss2: 0.8794, train_loss3: 0.1844]
+Thu 08 Aug 2024 14:52:17 INFO  epoch 79 evaluating [time: 0.13s, valid_score: 0.208900]
+Thu 08 Aug 2024 14:52:17 INFO  valid result: 
+recall@10 : 0.1699    recall@20 : 0.2608    recall@50 : 0.4237    ndcg@10 : 0.2089    ndcg@20 : 0.2278    ndcg@50 : 0.278    
+Thu 08 Aug 2024 14:52:17 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:52:53 INFO  epoch 80 training [time: 35.17s, train_loss1: 23.5549, train_loss2: 0.8779, train_loss3: 0.1845]
+Thu 08 Aug 2024 14:52:54 INFO  epoch 80 evaluating [time: 0.13s, valid_score: 0.209000]
+Thu 08 Aug 2024 14:52:54 INFO  valid result: 
+recall@10 : 0.1693    recall@20 : 0.2608    recall@50 : 0.4234    ndcg@10 : 0.209    ndcg@20 : 0.2279    ndcg@50 : 0.278    
+Thu 08 Aug 2024 14:52:54 INFO  Running E-step ! 
+Thu 08 Aug 2024 14:53:06 INFO  epoch 81 training [time: 11.40s, train_loss1: 23.5228, train_loss2: 0.8763, train_loss3: 0.1836]
+Thu 08 Aug 2024 14:53:06 INFO  epoch 81 evaluating [time: 0.13s, valid_score: 0.208500]
+Thu 08 Aug 2024 14:53:06 INFO  valid result: 
+recall@10 : 0.1695    recall@20 : 0.2605    recall@50 : 0.423    ndcg@10 : 0.2085    ndcg@20 : 0.2275    ndcg@50 : 0.2777    
+Thu 08 Aug 2024 14:53:06 INFO  Finished training, best eval result in epoch 70
+Thu 08 Aug 2024 14:53:06 INFO  Loading model structure and parameters from saved/SVD_MI-Aug-08-2024_14-25-20.pth
+Thu 08 Aug 2024 14:53:06 INFO  best valid : {'recall@10': 0.4695000000000002, 'recall@20': 0.5590000000000003, 'recall@50': 0.7215000000000003, 'ndcg@10': 0.5097000000000002, 'ndcg@20': 0.5277000000000003, 'ndcg@50': 0.5777000000000002}
+Thu 08 Aug 2024 14:53:06 INFO  test result: {'recall@10': 0.2166, 'recall@20': 0.3098, 'recall@50': 0.4737, 'ndcg@10': 0.2851, 'ndcg@20': 0.29510000000000003, 'ndcg@50': 0.3401}
